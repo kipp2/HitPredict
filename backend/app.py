@@ -14,13 +14,13 @@ def analyze_song():
     file.save(tmp.name)
 
     try:
-        # Extract bitrate
+        
         audio_meta = AudioFile(tmp.name)
         bitrate = getattr(audio_meta.info, "bitrate", None)
         if bitrate:
-            bitrate = bitrate / 1000  # Convert to kbps
+            bitrate = bitrate / 1000
 
-        # Load waveform for feature extraction
+       
         y, sr = librosa.load(tmp.name)
         tempo, _ = librosa.beat.beat_track(y=y, sr=sr)
         energy = float(sum(abs(y)) / len(y))
